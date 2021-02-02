@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 public class UserValidationTest {
     @Test
-    public void givenFirstNameReturnTrue() {
-        UserValidator userValidator = new UserValidator();
+    public void givenFirstNameReturnTrue() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validateFirstName("Suraj");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
@@ -14,17 +14,19 @@ public class UserValidationTest {
     }
 
     @Test
-    public void givenFirstNameIsFalse() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validateFirstName("Sur@j");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenFirstNameIsFalse() {
+        UserValidator userValidator = new UserValidator("SAD");
+
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
 
     @Test
-    public void givenLastNameIsTrue() {
-        UserValidator userValidator = new UserValidator();
+    public void givenLastNameIsTrue() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validateLastName("Temkar");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
@@ -32,17 +34,19 @@ public class UserValidationTest {
     }
 
     @Test
-    public void givenLastNameIsFalse() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validateLastName("Te@kar");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenLastNameIsFalse() {
+        UserValidator userValidator = new UserValidator("SAD");
+
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
 
     @Test
     public void givenEmailIsValid() throws Exception{
-        UserValidator userValidator = new UserValidator();
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validateEmail("Te@kar");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
@@ -50,17 +54,19 @@ public class UserValidationTest {
     }
 
     @Test
-    public void givenEmailIsInvalid() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validateEmail("Te@kar");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenEmailIsInvalid() {
+        UserValidator userValidator = new UserValidator("SAD");
+
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
 
     @Test
-    public void givenPhoneNumberIsValid() {
-        UserValidator userValidator = new UserValidator();
+    public void givenPhoneNumberIsValid() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validatePhoneNumber("Te@kar");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
@@ -68,33 +74,37 @@ public class UserValidationTest {
     }
 
     @Test
-    public void givenPhoneNumberIsInvalid() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validatePhoneNumber("Te@kar");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenPhoneNumberIsInValid() {
+        UserValidator userValidator = new UserValidator("SAD");
+
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
     @Test
-    public void givenPasswordIsValid() {
-        UserValidator userValidator = new UserValidator();
+    public void givenPasswordIsValid() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validatePasswordCheckOne("surajt43536");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
         Assertions.assertEquals("HAPPY", mood);
     }
     @Test
-    public void givenPasswordIsInvalid() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validatePasswordCheckOne("Temkar");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenPasswordIsInValid() {
+        UserValidator userValidator = new UserValidator("SAD");
+
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
 
     @Test
-    public void givenPasswordIsvalidTwo() {
-        UserValidator userValidator = new UserValidator();
+    public void givenPasswordIsvalidTwo() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validatePasswordCheckTwo("Temkar231425");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
@@ -102,45 +112,49 @@ public class UserValidationTest {
     }
 
     @Test
-    public void givenPasswordIsInvalidTwo() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validatePasswordCheckTwo("temkar231425");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenPasswordIsInValidTwo() {
+        UserValidator userValidator = new UserValidator("SAD");
+
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
     @Test
-    public void givenPasswordIsvalidThree() {
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validatePasswordCheckThree("Temkar123");
-        Assertions.assertTrue(result);
-        String mood = userValidator.analyseMood("This is a Happy Message");
-        Assertions.assertEquals("HAPPY", mood);
-    }
-    @Test
-    public void givenPasswordIsInvalidThree() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validatePasswordCheckThree("temkar32255");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
-    }
-    @Test
-    public void givenPasswordIsvalidForth() {
-        UserValidator userValidator = new UserValidator();
+    public void givenPasswordIsvalidThird() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
         boolean result = userValidator.validatePasswordCheckForth("Temkar@123");
         Assertions.assertTrue(result);
         String mood = userValidator.analyseMood("This is a Happy Message");
         Assertions.assertEquals("HAPPY", mood);
     }
     @Test
-    public void givenPasswordIsInvalidForth() throws Exception{
-        UserValidator userValidator = new UserValidator();
-        boolean result = userValidator.validatePasswordCheckForth("surajr355");
-        Assertions.assertFalse(result);
-        String mood = userValidator.analyseMood("This is Sad message");
-        Assertions.assertEquals("SAD", mood);
+    public void givenPasswordIsInValidThird() {
+        UserValidator userValidator = new UserValidator("SAD");
 
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
+    }
+    @Test
+    public void givenPasswordIsvalidForth() throws userValidatorException {
+        UserValidator userValidator = new UserValidator("HAPPY");
+        boolean result = userValidator.validatePasswordCheckForth("Temkar@123");
+        Assertions.assertTrue(result);
+        String mood = userValidator.analyseMood("This is a Happy Message");
+        Assertions.assertEquals("HAPPY", mood);
+    }
+    @Test
+    public void givenPasswordIsInValidForth() {
+        UserValidator userValidator = new UserValidator(null);
+        try {
+            userValidator.analyseMood(null);
+        } catch (userValidatorException e) {
+            Assertions.assertEquals("please Enter proper message", e.getMessage());
+        }
     }
 
 }

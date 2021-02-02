@@ -11,7 +11,11 @@ public class UserValidator {
     private static final String passwordUpperCase = "^(?=.*?[A-Z][a-zA-Z0-9]{8,}";
     private static final String passwordAtLeastOneNumber= "^(?=.*?[A-Z])(?=.*?[0-9])[a-zA-Z0-9]{8,}";
     private static final String passwordAtLeastOneSpecialCharacter = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&+=])(?=\\S+$).{8,}";
+    private static String message;
 
+    public UserValidator(String message) {
+        this.message = message;
+    }
     public boolean validateFirstName(String firstName){
         Pattern pattern = Pattern.compile(firstName);
         return pattern.matcher(firstName).matches();
@@ -49,12 +53,16 @@ public class UserValidator {
         Pattern pattern = Pattern.compile(passwordAtLeastOneSpecialCharacter);
         return pattern.matcher(passwordAtLeastOneSpecialCharacter).matches();
     }
-    public String analyseMood(String message) {
+    public String analyseMood(String message) throws userValidatorException {
+        try {
             if (message.contains("SAD"))
-                return "SAD";
+                throw new userValidatorException("please Enter Proper message");
             else
                 return "HAPPY";
-
+        } catch (userValidatorException e) {
+            System.out.println(e);
+        }
+        return message;
     }
 
 }

@@ -43,7 +43,7 @@ public class EmailValidateMultipleEntry {
     }
     @Test
     public void email(){
-        UserValidator validator = new UserValidator();
+        UserValidator validator = new UserValidator("");
         boolean result = validator.validateEmail(this.emailToTest);
         Assert.assertEquals(this.expectedResult, result);
 
